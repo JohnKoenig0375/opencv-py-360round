@@ -156,7 +156,10 @@ def main():
     RearrangeCMakeOutput(rearrange_cmake_output_data,
                          files_outside_package_dir,
                          package_data.keys())
-
+    
+    install_requirements = ["numpy>=%s" % numpy_version,
+                            'openh264'                       #Added OpenH264 to install_requirements
+                            ]
     skbuild.setup(
         name=package_name,
         version=package_version,
@@ -170,7 +173,7 @@ def main():
         maintainer="Olli-Pekka Heinisuo",
         include_package_data=True,
         ext_modules=EmptyListWithLength(),
-        install_requires="numpy>=%s" % numpy_version,
+        install_requires=install_requirements,
         classifiers=[
           'Development Status :: 5 - Production/Stable',
           'Environment :: Console',
