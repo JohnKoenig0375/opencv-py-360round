@@ -1,147 +1,37 @@
-[![Downloads](http://pepy.tech/badge/opencv-python)](http://pepy.tech/project/opencv-python)
+Welcome to opencv-py-360round
 
-## OpenCV on Wheels
+This repository is the final research product for capstone research by John Koenig in the Master of Data Science program at George Washington University in Washington, DC. (Research submitted 07DEC2018)
 
-**Unofficial** pre-built OpenCV packages for Python.
+Download the project presentation here:
+https://drive.google.com/file/d/1ZMl7sQl35cH1tLFPfZ0df5Eb3Mn2k9a3/view?usp=sharing
 
-### Installation and Usage
+Download the techincal paper here:
+https://drive.google.com/file/d/1EwymAORlaahkZ8iOKA238A8-sJoia4WN/view?usp=sharing
 
-1. If you have previous/other manually installed (= not installed via ``pip``) version of OpenCV installed (e.g. cv2 module in the root of Python's site-packages), remove it before installation to avoid conflicts.
-2. Select the correct package for your environment:
+This project introduces a new workflow for preparing 360 video data for data science research and operations. Additionally, the researcher will propose a custom Python software package, which is designed to facilitate computer vision and data science on 360 video data.
 
-    There are four different packages and you should **select only one of them**. Do not install multiple different packages in the same enviroment. There is no plugin architecture: all the packages use the same namespace (`cv2`). If you installed multiple different packages in the same environment, uninstall them all with ``pip uninstall`` and reinstall only one package.
+##The Camera for Data Science - Samsung 360 Round
+Among the pro 360 video cameras that are currently commercially available, the Samsung 360 Round stands out as uniquely suited for data science research. This camera was designed by Samsung and launched in October 2017. Though the camera was not designed specifically for data science, the researcher concludes that it is currently the best option for the 360 data scientist to conduct advanced research on 360 videos.
 
-    **a.** Packages for standard desktop environments (Windows, macOS, almost any GNU/Linux distribution)
+There are several features of the Samsung 360 Round that make it uniquely capable for data science. Most importantly, the camera is designed to be operated remotely through the Samsung 360 Round software suite. This capability could enable the data scientist to control and operate the camera through a Python API or the camera could be operated through automated scripts designed by the data scientist. The camera has additional features which are of interest to the 360 data scientist - stereo lenses (producing 3D video), an RJ45 port, the ability to record to Solid State Drive (SSD), 4k resolution, and a dust/water resistant camera housing.
 
-    - run ``pip install opencv-python`` if you need only main modules
-    - run ``pip install opencv-contrib-python`` if you need both main and contrib modules (check extra modules listing from [OpenCV documentation](https://docs.opencv.org/master/))
+No other 360 camera has this unique combination of features.
 
-    **b.** Packages for server (headless) environments
 
-    These packages do not contain any GUI functionality. They are smaller and suitable for more restricted environments.
+##Project Statement and Methodology
+The researcher will attempt to develop an open-source solution that will enable data scientists with a new capability to decode and process raw 360 video files from the Samsung 360 Round camera by using a convenient Python software package.
 
-    - run ``pip install opencv-python-headless`` if you need only main modules
-    - run ``pip install opencv-contrib-python-headless`` if you need both main and contrib modules (check extra modules listing from [OpenCV documentation](https://docs.opencv.org/master/))
+The methodology for this project will be exploratory and the researcher will develop all necessary software in order to decode a test 360 video file using a custom Python software package and load it into a computer vision framework for processing and analysis.
 
-3. Import the package:
+The purpose of this project is to enable other data scientists to easily conduct research on raw data from the Samsung 360 Round. This paper will conclude by outlining a technology roadmap for the future of data science research on 360 video data.
 
-    ``import cv2``
 
-    All packages contain haarcascade files. ``cv2.data.haarcascades`` can be used as a shortcut to the data folder. For example:
+##opencv-py-360round - Alpha Version
+The initial version of the opencv-py-360round package will be an alpha version that is still in the development and testing phase. This new project will be based on a fork of the existing opencv-python software package and will build four separate pre-built distributions that will include all the original functionality of opencv-python with 2 new capabilities.
 
-    ``cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")``
+First, opencv-py-360round will include additional code in the setup.py file for opencv-python that will install openh264 as a dependency in each of the four built distributions. Second, a new module will be added that will be named “round360.” The round360 module will contain all of the new functionality necessary in order to send raw 360 video data to openh264 for decoding. The round360 module will also include code necessary to download the test video file (described above) and run the testing function. There is no planned support for encoding in the H.264 codec.
 
-5. Read [OpenCV documentation](https://docs.opencv.org/master/)
+Once the raw 360 data is decoded/split, the round360 module will take the 17 split videos and load them into OpenCV as video captures. This will complete the data science workflow for 360 video data and the data will then be ready for processing and analysis.
 
-6. Before opening a new issue, read the FAQ below and have a look at the other issues which are already open.
 
-Frequently Asked Questions
---------------------------
 
-**Q: Do I need to install also OpenCV separately?**
-
-A: No, the packages are special wheel binary packages and they already contain statically built OpenCV binaries.
-
-**Q: Pip fails with ``Could not find a version that satisfies the requirement ...``?**
-
-A: Most likely the issue is related to too old pip and can be fixed by running ``pip install --upgrade pip``. Note that the wheel (especially manylinux) format does not currently support properly ARM architecture so there are no packages for ARM based platforms in PyPI. However, ``opencv-python`` packages for Raspberry Pi can be found from https://www.piwheels.org/.
-
-**Q: Import fails on Windows: ``ImportError: DLL load failed: The specified module could not be found.``?**
-
-A: If the import fails on Windows, make sure you have [Visual C++ redistributable 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48145) installed. If you are using older Windows version than Windows 10 and latest system updates are not installed, [Universal C Runtime](https://support.microsoft.com/en-us/help/2999226/update-for-universal-c-runtime-in-windows) might be also required.
-
-If the above does not help, check if you are using Anaconda. Old Anaconda versions have a bug which causes the error, see [this issue](https://github.com/skvark/opencv-python/issues/36) for a manual fix.
-
-**Q: I have some other import errors?**
-
-A: Make sure you have removed old manual installations of OpenCV Python bindings (cv2.so or cv2.pyd in site-packages).
-
-**Q: Why the package and import are different (opencv-python vs. cv2)?**
-
-A: It's easier for users to understand ``opencv-python`` than ``cv2`` and it makes it easier to find the package with search engines. `cv2` (old interface in old OpenCV versions was named as `cv`) is the name that OpenCV developers chose when they created the binding generators. This is kept as the import name to be consistent with different kind of tutorials around the internet. Changing the import name or behaviour would be also confusing to experienced users who are accustomed to the ``import cv2``.
-
-## Documentation for opencv-python
-
-[![AppVeyor CI test status (Windows)](https://img.shields.io/appveyor/ci/skvark/opencv-python.svg?maxAge=3600&label=Windows)](https://ci.appveyor.com/project/skvark/opencv-python)
-[![Travis CI test status (Linux and OS X)](https://img.shields.io/travis/skvark/opencv-python.svg?maxAge=3600&label=Linux+macOS)](https://travis-ci.org/skvark/opencv-python)
-
-The aim of this repository is to provide means to package each new [OpenCV release](https://github.com/opencv/opencv/releases) for the most used Python versions and platforms.
-
-### Build process
-
-The project is structured like a normal Python package with a standard ``setup.py`` file. The build process for a single entry in the build matrices is as follows (see for example ``appveyor.yml`` file):
-
-1. Checkout repository and submodules
-
-   -  OpenCV is included as submodule and the version is updated
-      manually by maintainers when a new OpenCV release has been made
-   -  Contrib modules are also included as a submodule
-
-2. Find OpenCV version from the sources
-3. Install dependencies (numpy)
-4. Build OpenCV
-
-   -  tests are disabled, otherwise build time increases too much
-   -  there are 4 build matrix entries for each build combination: with and without contrib modules, with and without GUI (headless)
-   -  Linux builds run in manylinux Docker containers (CentOS 5)
-
-5. Copy each ``.pyd/.so`` file to cv2 folder of this project and
-   generate wheel
-
-   - Linux and macOS wheels are checked with auditwheel and delocate
-
-6. Install the generated wheel
-7. Test that Python can import the library and run some sanity checks
-8. Use twine to upload the generated wheel to PyPI (only in release builds)
-
-The ``cv2.pyd/.so`` file is normally copied to site-packages. To avoid polluting the root folder this package wraps the statically built binary into cv2 package and ``__init__.py`` file in the package handles the import logic correctly.
-
-Since all packages use the same ``cv2`` namespace explained above, uninstall the other package before switching for example from ``opencv-python`` to ``opencv-contrib-python``.
-
-### Licensing
-
-Opencv-python package (scripts in this repository) is available under MIT license.
-
-OpenCV itself is available under [3-clause BSD License](https://github.com/opencv/opencv/blob/master/LICENSE).
-
-Third party package licenses are at [LICENSE-3RD-PARTY.txt](https://github.com/skvark/opencv-python/blob/master/LICENSE-3RD-PARTY.txt).
-
-All wheels ship with [FFmpeg](http://ffmpeg.org) licensed under the [LGPLv2.1](http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html).
-
-Linux and MacOS wheels ship with [Qt 4.8.7](http://doc.qt.io/qt-4.8/lgpl.html) licensed under the [LGPLv2.1](http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html).
-
-### Versioning
-
-``find_version.py`` script searches for the version information from OpenCV sources and appends also a revision number specific to this repository to the version string.
-
-### Releases
-
-A release is made and uploaded to PyPI when a new tag is pushed to master branch. These tags differentiate packages (this repo might have modifications but OpenCV version stays same) and should be incremented sequentially. In practice, release version numbers look like this:
-
-``cv_major.cv_minor.cv_revision.package_revision`` e.g. ``3.1.0.0``
-
-### Development builds
-
-Every commit to the master branch of this repo will be built. Possible build artifacts use local version identifiers:
-
-``cv_major.cv_minor.cv_revision+git_hash_of_this_repo`` e.g. ``3.1.0+14a8d39``
-
-These artifacts can't be and will not be uploaded to PyPI.
-
-### Manylinux wheels
-
-Linux wheels are built using [manylinux](https://github.com/pypa/python-manylinux-demo). These wheels should work out of the box for most of the distros (which use GNU C standard library) out there since they are built against an old version of glibc.
-
-The default ``manylinux`` images have been extended with some OpenCV dependencies. See [Docker folder](https://github.com/skvark/opencv-python/tree/master/docker) for more info.
-
-### Supported Python versions
-
-Python 2.7 is the only supported version in 2.x series. Python 3.x releases follow Numpy releases. For example Python 3.3 is no longer supported by Numpy so support for it has been dropped in ``opencv-python``, too.
-
-Currently, builds for following Python versions are provided:
-
-- 2.7
-- 3.4
-- 3.5
-- 3.6
-- 3.7
