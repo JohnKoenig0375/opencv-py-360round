@@ -13,7 +13,7 @@ def main():
 
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-    # These are neede for source fetching
+    # These are needed for source fetching
     cmake_source_dir = "opencv"
     build_contrib = get_build_env_var_by_name("contrib")
     # headless flag to skip GUI deps if needed
