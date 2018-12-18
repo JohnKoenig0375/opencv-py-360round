@@ -170,7 +170,7 @@ def main():
         version=package_version,                             #This will mirror opencv-python
         url='https://github.com/JohnKoenig0375/opencv-py-360round',
         license='MIT',
-        description='Wrapper package for OpenCV python bindings.',
+        description='This repository is forked from opencv-python and is adding features to handle data from the Samsung 360 Round camera.',
         long_description=long_description,
         long_description_content_type="text/markdown",
         packages=packages,
