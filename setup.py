@@ -168,7 +168,7 @@ def main():
     skbuild.setup(
         name=package_name,
         version=package_version,                             #This will mirror opencv-python
-        url='https://github.com/skvark/opencv-python',
+        url='https://github.com/JohnKoenig0375/opencv-py-360round',
         license='MIT',
         description='Wrapper package for OpenCV python bindings.',
         long_description=long_description,
