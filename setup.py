@@ -175,7 +175,7 @@ def main():
         long_description_content_type="text/markdown",
         packages=packages,
         package_data=package_data,
-        maintainer="Olli-Pekka Heinisuo",
+        maintainer="John Koenig",
         include_package_data=True,
         ext_modules=EmptyListWithLength(),
         dependency_links=dependency_urls,
