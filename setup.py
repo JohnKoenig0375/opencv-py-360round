@@ -158,11 +158,11 @@ def main():
                          package_data.keys())
     
     install_requirements = ["numpy>=%s" % numpy_version,
-                            'openh264'                       #Added OpenH264 to install_requirements
+                            #'openh264'                       #Added OpenH264 to install_requirements
                             ]
     
     #TODO Test this dependency
-    dependency_urls = ['https://github.com/cisco/openh264/releases/download/v1.8.0/Source.Code.tar.gz.gz'
+    dependency_urls = [#'https://github.com/cisco/openh264/releases/download/v1.8.0/Source.Code.tar.gz.gz'
                         ]   #Linux (64-bit)   https://github.com/cisco/openh264/releases
     
     skbuild.setup(
