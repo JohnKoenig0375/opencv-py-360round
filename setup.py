@@ -167,7 +167,7 @@ def main():
     
     skbuild.setup(
         name=package_name,
-        version=package_version,
+        version=package_version,                             #This will mirror opencv-python
         url='https://github.com/skvark/opencv-python',
         license='MIT',
         description='Wrapper package for OpenCV python bindings.',
